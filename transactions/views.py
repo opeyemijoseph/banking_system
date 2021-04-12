@@ -6,11 +6,12 @@ from django.urls import reverse_lazy
 from django.utils import timezone
 from django.views.generic import CreateView, ListView
 
-from transactions.constants import DEPOSIT, WITHDRAWAL
+from transactions.constants import DEPOSIT, WITHDRAWAL,LOAN
 from transactions.forms import (
     DepositForm,
     TransactionDateRangeForm,
     WithdrawForm,
+    RequestLoanForm,
 )
 from transactions.models import Transaction
 
@@ -106,7 +107,7 @@ class DepositMoneyView(TransactionCreateMixin):
 
         messages.success(
             self.request,
-            f'{amount}$ was deposited to your account successfully'
+            f'N{amount} was deposited to your account successfully'
         )
 
         return super().form_valid(form)
@@ -128,7 +129,48 @@ class WithdrawMoneyView(TransactionCreateMixin):
 
         messages.success(
             self.request,
-            f'Successfully withdrawn {amount}$ from your account'
+            f'Successfully withdrawn N{amount} from your account'
+        )
+
+        return super().form_valid(form)
+
+
+class RequestLoanView(TransactionCreateMixin):
+    form_class = RequestLoanForm
+    title = 'Apply For A Loan'
+
+    def get_initial(self):
+        initial = {'transaction_type': LOAN}
+        return initial
+
+    def form_valid(self, form):
+        amount = form.cleaned_data.get('amount')
+        account = self.request.user.account
+
+        if not account.initial_deposit_date:
+            now = timezone.now()
+            next_interest_month = int(
+                12 / account.account_type.interest_calculation_per_year
+            )
+            account.initial_deposit_date = now
+            account.interest_start_date = (
+                now + relativedelta(
+                    months=+next_interest_month
+                )
+            )
+
+        account.balance += amount
+        account.save(
+            update_fields=[
+                'initial_deposit_date',
+                'balance',
+                'interest_start_date'
+            ]
+        )
+
+        messages.success(
+            self.request,
+            f'N{amount} loan was accepted temporarily and would be validated by admin'
         )
 
         return super().form_valid(form)

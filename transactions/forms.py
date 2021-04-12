@@ -36,10 +36,25 @@ class DepositForm(TransactionForm):
 
         if amount < min_deposit_amount:
             raise forms.ValidationError(
-                f'You need to deposit at least {min_deposit_amount} $'
+                f'You need to deposit at least {min_deposit_amount} N'
             )
 
         return amount
+
+class RequestLoanForm(TransactionForm):
+
+    def clean_amount(self):
+
+        min_loan_request = 50000
+        amount = self.cleaned_data.get('amount')
+
+        if amount < min_loan_request:
+            raise forms.ValidationError(
+                f'Minimum loan amount is N{min_loan_request} '
+            )
+
+        return amount
+
 
 
 class WithdrawForm(TransactionForm):
@@ -56,17 +71,17 @@ class WithdrawForm(TransactionForm):
 
         if amount < min_withdraw_amount:
             raise forms.ValidationError(
-                f'You can withdraw at least {min_withdraw_amount} $'
+                f'You can withdraw at least {min_withdraw_amount} N'
             )
 
         if amount > max_withdraw_amount:
             raise forms.ValidationError(
-                f'You can withdraw at most {max_withdraw_amount} $'
+                f'You can withdraw at most {max_withdraw_amount} N'
             )
 
         if amount > balance:
             raise forms.ValidationError(
-                f'You have {balance} $ in your account. '
+                f'You have {balance} N in your account. '
                 'You can not withdraw more than your account balance'
             )
 
