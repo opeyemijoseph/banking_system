@@ -79,7 +79,7 @@ class UserBankAccount(models.Model):
     )
     account_no = models.PositiveIntegerField(unique=True)
     gender = models.CharField(max_length=1, choices=GENDER_CHOICE)
-    birth_date = models.DateField(null=True, blank=True)
+    birth_date = models.DateField(null=True, blank=True, help_text='1998')
     balance = models.DecimalField(
         default=0,
         max_digits=12,

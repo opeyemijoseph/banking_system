@@ -90,9 +90,12 @@
                 {% endif %}
             </div>
             <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ registration_form.birth_date.id_for_label }}">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"  for="{{ registration_form.birth_date.id_for_label }}">
                     {{ registration_form.birth_date.label }}
                 </label>
+                <div class="alert alert-danger" role="alert">
+                    YYYY-MM-DD
+                  </div>
                 {{ registration_form.birth_date }}
                 {% if registration_form.birth_date.errors %}
                     {% for error in registration_form.birth_date.errors %}

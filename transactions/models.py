@@ -21,6 +21,7 @@ class Transaction(models.Model):
     transaction_type = models.PositiveSmallIntegerField(
         choices=TRANSACTION_TYPE_CHOICES
     )
+    loan_status = models.BooleanField(default = False)
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

@@ -1,24 +1,90 @@
 {% extends 'core/base.html' %}
 
-{% block head_title %}Group Project{% endblock %}
+{% block head_title %}Banking System{% endblock %}
 
 {% block content %}
-    <div class="container mx-auto flex flex-col md:flex-row items-center my-12 md:my-24">
-        <!--Left Col-->
-        <div class="flex flex-col w-full lg:w-1/2 justify-center items-start pt-12 pb-24 px-6">
-            <h1 class="font-bold text-4xl my-4">Our Group Project</h1>
-            <p class="leading-normal mb-4">
-                Cooperative Solution created withvdfvdfby Group FUOYE.
-                <a href="#">Start</a>
-            </p>
-            <div>
-            <a href="{% url 'accounts:user_registration' %}" class="bg-transparent hover:bg-gray-800 text-gray-800 hover:text-white rounded shadow hover:shadow-lg py-2 px-4 border border-gray-900 hover:border-transparent">Register</a>
-            <a href="#" class="bg-transparent hover:bg-gray-800 text-gray-800 hover:text-white rounded shadow hover:shadow-lg py-2 px-4 border border-gray-900 hover:border-transparent">GitHub</a>
-            </div>
-        </div>
-        <!--Right Col-->
-        <div class="w-full lg:w-1/2 lg:py-6 text-center">
-            <h1 style="font-size: 12rem" class="font-black text-green-600">&#8358; &#8383;&#8358;</h1>
-        </div>
+<div class="container mx-auto flex flex-col md:flex-row items-center my-12 md:my-24">
+
+
+
+  <!--Left Col-->
+  <div class="flex flex-col w-full lg:w-1/2 justify-center items-start pt-12 pb-24 px-6">
+    <h1 class="font-bold text-4xl my-4">CPE 503 Group 4</h1>
+    <!-- <p class="leading-normal mb-4"> -->
+    <ul class="list-group">
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        George Daniel T.
+        <span class="badge badge-primary badge-pill">CPE/15/2817</span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        Anyaoku Chijioke P.
+        <span class="badge badge-primary badge-pill">CPE/15/2810</span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        Badejoko Adekemi
+        <span class="badge badge-primary badge-pill">CPE/15/2812</span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        Ogundaisi Opeyemi J.
+        <span class="badge badge-primary badge-pill">CPE/15/2821</span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        Omolaja Omolade O.
+        <span class="badge badge-primary badge-pill">CPE/15/2827</span>
+      </li>
+    </ul>
+    </p>
+    <div>
+      <a href="{% url 'accounts:user_registration' %}"
+        class="bg-transparent hover:bg-gray-800 text-gray-800 hover:text-white rounded shadow hover:shadow-lg py-2 px-4 border border-gray-900 hover:border-transparent">Register</a>
+      <a href="#"
+        class="bg-transparent hover:bg-gray-800 text-gray-800 hover:text-white rounded shadow hover:shadow-lg py-2 px-4 border border-gray-900 hover:border-transparent">Login</a>
     </div>
-{% endblock %}
+  </div>
+
+
+
+
+
+
+
+
+  <!--Right Col-->
+  <div class="w-full lg:w-1/2 lg:py-6 text-center">
+
+    <div class="row">
+      <div class="col-4">
+        <div class="list-group" id="list-tab" role="tablist">
+          <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list"
+            href="#list-home" role="tab" aria-controls="home">Create Cooperator's Bank Account</a>
+          <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list"
+            href="#list-profile" role="tab" aria-controls="profile">Deposit, Withdraw & Loan.</a>
+          <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list"
+            href="#list-messages" role="tab" aria-controls="messages">Transact Based On Account
+            Type</a>
+          <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list"
+            href="#list-settings" role="tab" aria-controls="settings">Super admin priviledges</a>
+        </div>
+      </div>
+      <div class="col-8">
+        <div class="tab-content" id="nav-tabContent">
+          <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">New
+            cooperators can click on register then, account number and details shall be created and account type as they
+            specified during registeration.
+          </div>
+          <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">Click on the
+            Withdraw and Deposit tabs in the main menu to make loan withdrawal and deposits respectively. Click the loan
+            tab to make loan requests Note: Loan acceptance would appear temporarily would be declined by admin if it
+            does not work the society.</div>
+          <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">Interests
+            can be calculated and specified by admin for each account type based on the typ of account specified. Also
+            admin can create a withdrawal limit depending on the account type.</div>
+          <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">Yeppy!, The
+            site administrator can add Withdrawal Limit and Other User Management like deleting a user account or
+            altering loans. History of user transactions can also be monitored from the admin interface.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock %}
